@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        h2 { color: #2c3e50; margin-bottom: 25px; font-weight: 600; }
+        input { display: block; width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        input:focus { border-color: #3498db; outline: none; box-shadow: 0 0 5px rgba(52, 152, 219, 0.3); }
+        button { background: #3498db; color: white; border: none; padding: 12px; width: 100%; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background 0.3s; }
+        button:hover { background: #2980b9; }
+        .footer-link { margin-top: 20px; font-size: 13px; color: #7f8c8d; }
+        .footer-link a { color: #3498db; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Create Account</h2>
+        <form method="POST" action="{% url 'regi' %}"> 
+            {% csrf_token %}
+            <input type="text" name="studentname" placeholder="Full Name" required>
+            <input type="text" name="rollnumber" placeholder="Roll Number" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Register Student</button>
+        </form>
+        <div class="footer-link">Already have an account? <a href="{% url 'login' %}">Login here</a></div>
+    </div>
+</body>
+</html>
