@@ -85,12 +85,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ... scroll down to DATABASES ...
-
 DATABASES = {
     'default': dj_database_url.config(
-        # This checks for Render's DATABASE_URL first. 
-        # If it doesn't find it (like on your Windows machine), it creates a local sqlite3 file.
-        default=os.environ.get('DATABASE_URL', f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
+        default=os.environ.get('DATABASE_URL'),
         conn_max_age=600
     )
 }
