@@ -70,16 +70,27 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-import os
-import dj_database_url
+
 
 # ... your other settings ...
 
 # This tells Django: "Look for DATABASE_URL in Render's environment. 
 # If you don't find it, fall back to the local Docker 'db' setup."
+import os
+import dj_database_url
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# (Make sure this BASE_DIR variable exists in your settings file)
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# ... scroll down to DATABASES ...
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', 'postgres://postgres:postgres@db:5432/student_db'),
+        # This checks for Render's DATABASE_URL first. 
+        # If it doesn't find it (like on your Windows machine), it creates a local sqlite3 file.
+        default=os.environ.get('DATABASE_URL', f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
         conn_max_age=600
     )
 }
